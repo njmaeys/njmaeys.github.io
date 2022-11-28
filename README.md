@@ -1,1 +1,0 @@
-Nate Maeys Fine Art
