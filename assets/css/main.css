@@ -3863,10 +3863,10 @@ input, select, textarea {
 
 			#main > .posts > article {
 				border-color: #eeeeee;
-				border-left-width: 2px;
 				border-style: solid;
-				border-top-width: 2px;
 				text-align: center;
+				border-left-width: 2px;
+				border-top-width: 2px;
 			}
 
 				#main > .posts > article > :last-child {
@@ -3913,7 +3913,7 @@ input, select, textarea {
 					border-top-width: 2px;
 				}
 
-				#main > .posts > article:nth-child(n) {
+				main > .posts > article:nth-child(n) {
 					border-left-width: 0;
 				}
 
