@@ -3242,6 +3242,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			background-repeat: repeat,								no-repeat,													no-repeat;
 			background-attachment: scroll,								scroll,														scroll;
 			z-index: -1;
+			filter: brightness(50%);
 		}
 
 			#wrapper > .bg.fixed {
