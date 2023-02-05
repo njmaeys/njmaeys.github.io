@@ -1,4 +1,4 @@
-# Nate Maeys Fine Art
+![](images/NMFA_Color_White.png)
 This is my github.io hosted pages for my artwork
 
 ### Credits
