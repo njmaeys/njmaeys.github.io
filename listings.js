@@ -15,7 +15,7 @@ fetch('listings.json')
             title.innerHTML = item.title;
         
             let button = document.createElement("button");
-            button.innerHTML = "Purchase $" + item.price;
+            button.innerHTML = "Learn More";
             button.onclick = function() {
                 window.open(item.url, "_blank");
             };
