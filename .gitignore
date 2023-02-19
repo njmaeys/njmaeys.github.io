@@ -3,3 +3,5 @@
 env.bat
 __pycache__
 token.json
+nohup.out
+
