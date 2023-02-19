@@ -56,9 +56,10 @@ def get_listings():
         },
     )
 
-    # Get a refresh token and call get_listings again
     try_count = 0
+
     if resp.status_code == 401:
+        # Get a refresh token and call get_listings again
         if try_count > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
         try_count += 1
@@ -80,6 +81,15 @@ def get_listings():
             json.dump(response.json(), outfile)
 
         get_listings()
+    
+    if resp.status_code != 200:
+        # Get a refresh token and call get_listings again
+        if try_count > 3:
+            raise HTTPException(status_code=429, detail="Too many attempts")
+        try_count += 1
+
+        get_listings()
+
     
     return parse_listings(resp.json()["results"])
     
