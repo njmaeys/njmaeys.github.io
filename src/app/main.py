@@ -13,7 +13,6 @@ CODE_VERIFIER=os.environ.get("CODE_VERIFIER")
 
 app = FastAPI()
 
-#uvicorn main:app --port 80 --reload
 origins = [
     # NOTE: This is bad but I give up
     "*"
