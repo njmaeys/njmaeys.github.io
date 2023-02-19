@@ -19,9 +19,17 @@ It's important to remember (for myself) that this is running on the living room 
 
 If I ever need to restart the service make sure to activate the virtualenv then run as a background process.
 
-- `nohup uvicorn main:app --port 1024 --host 0.0.0.0 &`
+```shell
+$ cd src/app
+$
+$ nohup python runner.py &
+```
 
 Also, for reasons I couldn't use a default port so it's running at `1024` and I need to specify that in the requests to the `A` record serving at `api.natemaeysfineart.com`.
+
+**Certificates**
+
+Eventually the certs will expire and Porkbun automatically creates new ones. Once they expire grab them and put them in the server and restart the app.
 
 ---
 ### Credits
