@@ -1,6 +1,6 @@
 let parentDiv = document.getElementById("listings");
 
-fetch('http://api.natemaeysfineart.com:1024/listings')
+fetch('https://api.natemaeysfineart.com:1024/listings')
     .then(response => response.json())
     .then(data => {
         data.forEach(item => {
