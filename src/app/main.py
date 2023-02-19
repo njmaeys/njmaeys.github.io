@@ -82,7 +82,7 @@ def get_listings():
 
         get_listings()
     
-    if resp.status_code != 200:
+    if resp.status_code != 200 or not resp.json().get("results", None):
         # Get a refresh token and call get_listings again
         if try_count > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
