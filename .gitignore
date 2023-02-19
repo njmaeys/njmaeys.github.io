@@ -2,3 +2,4 @@
 .env
 env.bat
 __pycache__
+token.json
