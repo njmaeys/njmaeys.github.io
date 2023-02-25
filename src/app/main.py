@@ -82,7 +82,9 @@ def get_listings():
 
         get_listings()
     
-    if not resp.json().get("results", None):
+    results = resp.json()
+    listings = results.get("results", None)
+    if not listings:
         # Get a refresh token and call get_listings again
         if try_count > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
@@ -91,5 +93,5 @@ def get_listings():
         get_listings()
 
     
-    return parse_listings(resp.json()["results"])
+    return parse_listings(listings)
     
