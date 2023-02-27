@@ -9,6 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 SHOP_ID=os.environ.get("SHOP_ID")
 API_KEY=os.environ.get("API_KEY")
 CODE_VERIFIER=os.environ.get("CODE_VERIFIER")
+TRY_COUNT=0
 
 
 app = FastAPI()
@@ -28,6 +29,9 @@ app.add_middleware(
 
 def parse_listings(data):
     listings = []
+    if not isinstance(data, list):
+        return listings
+
     for d in data:
         # TODO: Parse through some day and get each image for display on my site.
         # For now just use the first one.
@@ -56,13 +60,11 @@ def get_listings():
         },
     )
 
-    try_count = 0
-
     if resp.status_code == 401:
         # Get a refresh token and call get_listings again
-        if try_count > 3:
+        if TRY_COUNT > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
-        try_count += 1
+        TRY_COUNT += 1
 
         payload = {
             "grant_type": "refresh_token",
@@ -86,12 +88,19 @@ def get_listings():
     listings = results.get("results", None)
     if not listings:
         # Get a refresh token and call get_listings again
-        if try_count > 3:
+        if TRY_COUNT > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
-        try_count += 1
+        TRY_COUNT += 1
 
         get_listings()
 
+    listings = parse_listings(listings)
+    if not listings:
+        # Get a refresh token and call get_listings again
+        if TRY_COUNT > 3:
+            raise HTTPException(status_code=429, detail="Too many attempts")
+        TRY_COUNT += 1
+
+        get_listings()
     
-    return parse_listings(listings)
-    
+    return listings
