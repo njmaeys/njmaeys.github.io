@@ -9,7 +9,6 @@ from starlette.middleware.cors import CORSMiddleware
 SHOP_ID=os.environ.get("SHOP_ID")
 API_KEY=os.environ.get("API_KEY")
 CODE_VERIFIER=os.environ.get("CODE_VERIFIER")
-TRY_COUNT=0
 
 
 app = FastAPI()
@@ -48,6 +47,8 @@ def parse_listings(data):
 
 @app.get("/listings")
 def get_listings():
+    TRY_COUNT=0
+
     # This would be much better done with a DB but a json file locally is good enough
     with open("token.json", "r") as tf:
         token_data = json.load(tf)
