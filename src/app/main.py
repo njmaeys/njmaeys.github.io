@@ -54,7 +54,7 @@ def get_listings():
         token_data = json.load(tf)
 
     resp = requests.get(
-        f"https://openapi.etsy.com/v3/application/shops/{SHOP_ID}/listings?includes=Images",
+        f"https://openapi.etsy.com/v3/application/shops/{SHOP_ID}/listings?limit=50&includes=Images",
         headers={
             "X-API-KEY": API_KEY,
             "Authorization": f"Bearer {token_data['access_token']}"
