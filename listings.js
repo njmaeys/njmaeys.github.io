@@ -5,7 +5,7 @@ function requestData() {
     fetch('https://api.natemaeysfineart.com:1024/listings')
     .then(response => response.json())
     .then(data => {
-        if (!data) {
+        if (data.length < 1) {
             if (attempts < 3) {
                 attempts++;
                 setTimeout(requestData, 1000);

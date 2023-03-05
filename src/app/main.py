@@ -1,6 +1,7 @@
 import json
 import os
 import requests
+import logging
 
 from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
@@ -9,6 +10,8 @@ from starlette.middleware.cors import CORSMiddleware
 SHOP_ID=os.environ.get("SHOP_ID")
 API_KEY=os.environ.get("API_KEY")
 CODE_VERIFIER=os.environ.get("CODE_VERIFIER")
+
+LOGGER = logging.getLogger()
 
 
 app = FastAPI()
@@ -62,6 +65,7 @@ def get_listings():
     )
 
     if resp.status_code == 401:
+        LOGGER.info("Getting new token")
         # Get a refresh token and call get_listings again
         if TRY_COUNT > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
@@ -88,6 +92,7 @@ def get_listings():
     results = resp.json()
     listings = results.get("results", None)
     if not listings:
+        LOGGER.info("No listings")
         # Get a refresh token and call get_listings again
         if TRY_COUNT > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
@@ -97,6 +102,7 @@ def get_listings():
 
     listings = parse_listings(listings)
     if not listings:
+        LOGGER.info("Failed parsing")
         # Get a refresh token and call get_listings again
         if TRY_COUNT > 3:
             raise HTTPException(status_code=429, detail="Too many attempts")
