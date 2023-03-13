@@ -22,6 +22,7 @@ function requestData() {
                 aDiv.className = "image fit";
                 let image = document.createElement("img");
                 image.src = item.image;
+                image.loading = "lazy";
                 aDiv.appendChild(image);
             
                 let title = document.createElement("h3");
