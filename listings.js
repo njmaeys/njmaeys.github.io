@@ -1,3 +1,12 @@
+const spinnerContainer = document.getElementById('spinner-container');
+const spinnerIcon = document.createElement('i');
+spinnerIcon.classList.add('fas', 'fa-spinner', 'fa-spin');
+const loadingText = document.createElement('span');
+loadingText.textContent = ' Loading...';
+
+spinnerContainer.appendChild(spinnerIcon);
+spinnerContainer.appendChild(loadingText);
+
 let parentDiv = document.getElementById("listings");
 let attempts = 0;
 
@@ -41,6 +50,10 @@ function requestData() {
                 parentDiv.appendChild(childDiv);
             });
         }
+    })
+    .finally(() => {
+    spinnerContainer.removeChild(spinnerIcon);
+    spinnerContainer.removeChild(loadingText);
     });
 }
 
