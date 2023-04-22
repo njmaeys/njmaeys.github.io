@@ -11,6 +11,8 @@ let parentDiv = document.getElementById("listings");
 let attempts = 0;
 
 function requestData() {
+    let isFirstImageLoaded = false;
+
     fetch('https://api.natemaeysfineart.com:1024/listings')
     .then(response => response.json())
     .then(data => {
@@ -43,6 +45,13 @@ function requestData() {
                     window.open(item.url, "_blank");
                 };
 
+                image.onload = () => {
+                    if (!isFirstImageLoaded) {
+                        spinnerContainer.style.display = "none";
+                        listingsContainer.style.display = "flex";
+                        isFirstImageLoaded = true;
+                    }
+                };
                 childDiv.appendChild(aDiv);
                 childDiv.appendChild(title);
                 childDiv.appendChild(button);
@@ -58,3 +67,4 @@ function requestData() {
 }
 
 requestData();
+
